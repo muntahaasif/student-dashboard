@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10172a">
+  <title>Gradely — Student Results</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">G</span><span>gradely<span class="brand-dot">.</span><small>ACADEMIC PORTAL</small></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav-menu">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">◫</span> Overview</a>
+        <a class="nav-link" href="#students"><span class="nav-icon">♙</span> Students</a>
+        <a class="nav-link" href="#rankers"><span class="nav-icon">♛</span> Top performers</a>
+        <a class="nav-link" href="#analytics"><span class="nav-icon">▥</span> Analytics</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><div class="help-icon">✦</div><strong>Keep growing</strong><p>Every result tells a story. Celebrate progress and keep learning.</p></div>
+        <div class="profile-mini"><div class="avatar avatar-purple">MA</div><div><strong>Admin Portal</strong><small>Administrator</small></div><span class="profile-more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Overview</strong></div>
+        <div class="topbar-right"><span class="live-dot"></span><span class="topbar-status">Academic session active</span><div class="avatar avatar-light">MA</div></div>
+      </header>
+
+      <section class="welcome-row">
+        <div><div class="eyebrow">ACADEMIC OVERVIEW <span class="eyebrow-line"></span></div><h1>Student performance</h1><p class="subheading">A clear picture of progress, achievement and potential.</p></div>
+        <div class="date-chip"><span>▦</span><span id="todayDate">Today</span></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Class statistics">
+        <article class="stat-card stat-primary"><div class="stat-top"><span>Total students</span><span class="stat-icon">♙</span></div><div class="stat-number" id="totalStudents">0</div><div class="stat-foot"><span class="stat-accent">●</span> Enrolled in this class</div><div class="stat-decoration"></div></article>
+        <article class="stat-card"><div class="stat-top"><span>Class average</span><span class="stat-icon purple-icon">⌁</span></div><div class="stat-number" id="classAverage">0<small>%</small></div><div class="stat-foot">Across all subjects</div><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        <article class="stat-card"><div class="stat-top"><span>Passed students</span><span class="stat-icon green-icon">✓</span></div><div class="stat-number" id="passedStudents">0</div><div class="stat-foot"><span class="positive" id="passRate">0% pass rate</span></div><div class="progress-track"><span id="passProgress"></span></div></article>
+        <article class="stat-card"><div class="stat-top"><span>Needs support</span><span class="stat-icon orange-icon">↗</span></div><div class="stat-number" id="failedStudents">0</div><div class="stat-foot">Students below pass marks</div><div class="support-note">Keep encouraging them</div></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel add-panel">
+          <div class="panel-heading"><div><div class="eyebrow">STUDENT DIRECTORY</div><h2>Add a student</h2><p>Enter student details and subject marks.</p></div><span class="heading-icon">＋</span></div>
+          <form id="studentForm" class="student-form">
+            <label class="field full-field">Student name<input id="name" type="text" placeholder="e.g. Ayesha Khan" maxlength="50" required></label>
+            <label class="field">City<input id="city" type="text" placeholder="e.g. Karachi" maxlength="40" required></label>
+            <label class="field">Pass marks <span class="optional">Optional</span><input id="passMarks" type="number" min="0" max="200" placeholder="100"></label>
+            <div class="field"><label for="math">Mathematics <span class="subject-max">/ 100</span></label><input id="math" type="number" min="0" max="100" placeholder="0–100" required></div>
+            <div class="field"><label for="english">English <span class="subject-max">/ 100</span></label><input id="english" type="number" min="0" max="100" placeholder="0–100" required></div>
+            <button class="primary-btn full-field" type="submit"><span>＋</span> Add student record</button>
+          </form>
+          <p class="form-hint"><span>ⓘ</span> Marks are out of 200. Default passing marks are 100.</p>
+        </article>
+
+        <article class="panel rank-panel" id="rankers">
+          <div class="panel-heading"><div><div class="eyebrow">CELEBRATING EXCELLENCE</div><h2>Top performers</h2><p>Our highest-scoring students.</p></div><span class="heading-icon trophy">♛</span></div>
+          <div class="podium" id="topThree"></div>
+          <p class="rank-note" id="others">Add students to see the class ranking.</p>
+        </article>
+      </section>
+
+      <section class="panel results-panel" id="students">
+        <div class="panel-heading results-heading"><div><div class="eyebrow">CLASS RECORDS</div><h2>Student results</h2><p>Review, search and manage student performance.</p></div><span class="record-count" id="recordCount">0 RECORDS</span></div>
+        <div class="table-tools"><div class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="Search student by name or city..."></div><div class="tool-right"><select id="statusFilter" aria-label="Filter by result"><option value="all">All results</option><option value="pass">Passed</option><option value="fail">Needs support</option></select><button class="secondary-btn" id="avgBtn" type="button">Calculate average</button></div></div>
+        <div class="average-message" id="avgOutput" aria-live="polite"></div>
+        <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>CITY</th><th>MATH</th><th>ENGLISH</th><th>TOTAL</th><th>GRADE</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="resultBody"></tbody></table></div>
+        <div class="table-footer"><span id="showingText">Showing 0 students</span><span>Results are calculated automatically</span></div>
+      </section>
+
+      <section class="bottom-grid" id="analytics">
+        <article class="panel marks-panel"><div class="panel-heading"><div><div class="eyebrow">PERFORMANCE SNAPSHOT</div><h2>Marks overview</h2><p>Individual student totals at a glance.</p></div><span class="heading-icon">▤</span></div><ul id="marksList" class="marks-list"></ul></article>
+        <article class="panel counter-panel"><div class="panel-heading"><div><div class="eyebrow">A LITTLE INTERACTION</div><h2>Activity counter</h2><p>Track your dashboard interactions.</p></div><span class="heading-icon">✧</span></div><div class="counter-display"><span id="counterOutput">0</span><small>BUTTON CLICKS</small></div><button id="counterBtn" class="counter-btn" type="button">Count an interaction <span>↗</span></button><p class="counter-caption">Every click is a little step forward.</p></article>
+      </section>
+      <footer class="footer"><span>© 2026 Gradely Academic Portal</span><span>Designed for better learning outcomes <b>✦</b></span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
